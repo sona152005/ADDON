@@ -1,0 +1,267 @@
+
+( OOPS CONCEPT)
+TYPE 1(ABSTRACT)
+
+
+public  abstract class AbstractClass {
+       abstract int buySoap(); 
+          
+           int buyPerfume() {
+        	   int amount = 100;
+        	   String name = "fog";
+        	   int productCost = 80;
+        	   int balance = amount-productCost;
+        	   return balance;
+           }  
+}  
+               (or)
+how to create interface method:
+package oops;
+
+public interface AbstractInterface {
+               void buyDress();
+               
+}
+---------------------------------------------------------
+to define object
+AbstractInterface ai = new AbstractInterface() {
+	public void buyDress() {
+	
+}
+---------------------------------------------------------
+TYPE2(ENCAPSULATION)
+1)using setter and getter method 
+package oops;
+import java.util.Date;
+public class  EncapsulationClass {
+      private  String email;
+      private String username;
+      private long mobile;
+      private Date age;
+      private char gender;
+      private boolean graduate;
+     
+ public void setEmail(String email) {
+	 this.email = email;
+ }
+   
+ public String getEmail() {
+	 return email;
+ }
+    
+ public void setUsername(String username) {
+	 this.username = username;
+ }
+  public String getUsername() {
+	 return username;
+ }
+ 
+ public void setMobile(long mobile) {
+	 this.mobile = mobile;
+ }
+ public long getMobile() {
+	 return mobile;
+ }
+ 
+ public void setAge(Date age) {
+	 this.age = age;
+ }
+ public Date getAge() {
+	 return age;
+ }
+ 
+ public void setGender(char gender) {
+	 this.gender = gender;
+ }
+ public char getGender() {
+	 return gender;
+ }
+ 
+ public void setGraduate(boolean graduate) {
+	 this.graduate = graduate;
+ }
+ public boolean getGraduate() {
+	 return graduate;
+ }
+ 
+} 
+
+
+oops.java
+package oops;
+import java.util.Date;
+import java.util.Scanner;
+public class OOPSClass {
+	public static void main(String[] args)
+	{
+	   EncapsulationClass user = new EncapsulationClass(); 
+       Scanner sc = new Scanner(System.in);
+       System.out.println("enter your email");
+       user.setEmail(sc.next());
+       System.out.println(user.getEmail());
+       
+       System.out.println("enter username");
+       user.setUsername(sc.next());
+       System.out.println(user.getUsername());
+       
+       System.out.println("enter mobile");
+       user.setMobile(sc.nextLong());
+       System.out.println(user.getMobile());
+
+       System.out.println("enter dob (eg.yyyy/mm/dd");
+       Date dob = new Date("1990/10/10");
+       user.setAge(dob);
+       System.out.println(user.getAge());
+       
+       System.out.println("gender");
+       user.setGender(sc.next().charAt(0));
+       System.out.println(user.getGender());
+       
+       System.out.println("graduate");
+       user.setGraduate(sc.nextBoolean());
+       System.out.println(user.getGraduate());
+
+         sc.close();
+	}
+output:
+enter your email
+2326jb46@kgacs.com
+2326jb46@kgacs.com
+enter username
+java
+java
+enter mobile
+123
+123
+enter dob (eg.yyyy/mm/dd
+Wed Oct 10 00:00:00 IST 1990
+gender
+female
+f
+graduate
+true
+true
+
+-----------------------------------------------------------------------
+
+Inheritance Structure:
+package OOPS_DAY4;
+
+
+
+//single  inheritance
+
+class parent {
+
+	
+
+}
+
+class Child extends parent{
+
+	
+
+}
+
+
+
+//multilevel
+
+class A{
+
+	
+
+}
+
+class B extends A{
+
+	
+
+}
+
+class C extends B{
+
+	
+
+}
+
+
+
+//muiltiple
+
+interface parent1{
+
+	
+
+}
+
+interface parent2{
+
+	
+
+}
+
+interface child extends parent1,parent2{
+
+	
+
+}
+
+
+
+//hierarichal
+
+class parent_A{
+
+	
+
+}
+
+class child_B extends A{
+
+	
+
+}
+
+class child_C extends A{
+
+	
+
+}
+
+class child_D extends A{
+
+	
+
+}
+
+
+
+//hybrid
+
+interface c1{
+
+	
+
+}
+
+interface c2 extends c1{
+
+	
+
+}
+
+interface c3 extends c1{
+
+	
+
+}
+
+interface c4 extends c2{
+
+	
+
+}
+
+
+
