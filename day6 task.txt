@@ -1,0 +1,83 @@
+Task1:
+package Collection.set;
+import java.util.HashSet;
+
+
+public class HashSetClass {
+	public static void main(String[] args) {
+		HashSet <String> hset = new HashSet<>();
+		hset.add("java@gamil.com");
+		hset.add("c@gamil.com");
+		hset.add("linux@gamil.com");
+		hset.add("java@gamil.com");
+		System.out.println(hset);
+		
+	}
+
+}
+
+output:
+[linux@gamil.com, java@gamil.com, c@gamil.com]
+
+
+
+Task2:
+package Collection.map;
+import java.util.HashMap;
+
+public class HashMapClass {
+	public static void main(String[] args) {
+		HashMap <String,Integer> student = new HashMap <>();
+		student.put("sona",90);
+		student.put("anujha",95);
+		student.put("maha",96);
+		
+		int total = 0;
+        for (int mark : student.values()) {
+            total += mark;
+        }
+        double average = 0;
+        if (!student.isEmpty()) {
+            average = (double)total / student.size();
+        }
+
+       
+        System.out.println("Student Marks:");
+        for(String mark: student.keySet())
+            System.out.println(mark+ ": " + student.get(mark));
+        
+ System.out.println("average"+average);
+			
+	}
+}
+
+output:
+Student Marks:
+anujha: 95
+sona: 90
+maha: 96
+average93.66666666666667
+
+
+
+Task3:
+package Thread;
+public class ThreadClass extends Thread{
+ public void run() {
+     for (int i = 1; i <= 10; i++) {
+         System.out.println(i);
+         try {
+             Thread.sleep(200);
+         } catch (InterruptedException e) {
+             
+         }
+     }
+ }
+ public static void main(String[] args) {
+     ThreadClass thread = new ThreadClass();
+     thread.start();
+ }
+}
+
+
+
