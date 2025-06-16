@@ -1,0 +1,140 @@
+TASK1:
+create 3 tables and populate data:
+1st table:
+ 
+create table student_details(
+    -> rollno int,
+    -> name varchar(20),
+    -> course varchar(30));
+
+select * from student_details;
++--------+--------+---------+
+| rollno | name   | course  |
++--------+--------+---------+
+|      1 | sona   | tamil   |
+|      2 | sathya | english |
+|      3 | priya  | maths   |
++--------+--------+---------+
+
+2nd table:
+
+create table course(
+    -> courseid int,
+    -> coursename varchar(30),
+    -> mentor varchar(30));
+
+select * from course;
++----------+------------+----------+
+| courseid | coursename | mentor   |
++----------+------------+----------+
+|       11 | tamil      | thilagar |
+|       22 | english    | saranya  |
+|       33 | maths      | shabana  |
++----------+------------+----------+
+
+3rd table:
+
+ create table exam(
+    -> name varchar(20),
+    -> regno int,
+    -> mark int);
+
+ select * from exam;
++-----------+-------+------+
+| name      | regno | mark |
++-----------+-------+------+
+| anu       |   111 |   80 |
+| dhanya    |   222 |   87 |
+| dhanyatha |   333 |   89 |
++-----------+-------+------+
+
+
+TASK2:
+update coursefees:
+
+ create table coursefee(
+    -> regno int,
+    -> name varchar(20),
+    -> course fees int);
+
+
+insert into coursefee values (1,'sona',30000),(2,'sathya',40000),(3,'priya','35000');
+
+
+ update coursefee set coursefee='45000' where rollno='3';
+
+ select * from coursefee;
++--------+--------+-----------+
+| rollno | name   | coursefee |
++--------+--------+-----------+
+|      1 | sona   |     30000 |
+|      2 | sathya |     40000 |
+|      3 | priya  |     45000 |
++--------+--------+-----------+
+
+
+TASK3:
+insert 5 records:
+
+insert into student_details values(1,'sona','tamil'),(2,'sathya','english'),(3,'priya','maths'),(4,'dhanyatha','science'),(5,'dhanya','history');;
+
+
+mysql> select * from student_details;
++--------+-----------+---------+
+| rollno | name      | course  |
++--------+-----------+---------+
+|      1 | sona      | tamil   |
+|      2 | sathya    | english |
+|      3 | priya     | maths   |
+|      4 | dhanyatha | science |
+|      5 | dhanya    | history |
++--------+-----------+---------+
+
+TASK4:
+create student and course tables:
+
+
+ create table student(
+    -> regno int,
+    -> name varchar (30),
+    -> course varchar(30));
+
+
+select * from student;
++-------+--------+--------+
+| regno | name   | course |
++-------+--------+--------+
+|     1 | priya  | maths  |
+|     2 | sathya | tamil  |
++-------+--------+--------+
+
+ create table maths(
+    -> name varchar(30),
+    -> course varchar(15),
+    -> mentor varchar(20));
+
+
+insert into maths values ('priya','maths','sona');
+
+select * from maths;
++-------+--------+--------+
+| name  | course | mentor |
++-------+--------+--------+
+| priya | maths  | sona   |
++-------+--------+--------+
+
+create table tamil(
+    -> name varchar (20),
+    -> course varchar(30),
+    -> mentor varchar(30));
+
+ insert into tamil values ('sathya','tamil','dhanyatha');
+
+
+ select * from tamil;
++--------+--------+-----------+
+| name   | course | mentor    |
++--------+--------+-----------+
+| sathya | tamil  | dhanyatha |
++--------+--------+-----------+
+
