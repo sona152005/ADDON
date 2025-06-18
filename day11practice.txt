@@ -1,0 +1,160 @@
+mysql>  CREATE TABLE Customers (
+    ->     CustomerID INT PRIMARY KEY,
+    ->     Name VARCHAR(100),
+    ->     Email VARCHAR(100)
+    -> );
+
+mysql> select * from customers;
++------------+-------+-------------------+
+| CustomerID | Name  | Email             |
++------------+-------+-------------------+
+|          1 | Alice | alice@example.com |
+|          2 | Bob   | bob@example.com   |
++------------+-------+-------------------+
+
+
+mysql> CREATE TABLE Orders (
+    ->     OrderID INT PRIMARY KEY,
+    ->     OrderDate DATE,
+    ->     Amount DECIMAL(10, 2),
+    ->     CustomerID INT,
+    ->     FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+    -> );
+
+
+mysql> select * from orders;
++---------+------------+--------+------------+
+| OrderID | OrderDate  | Amount | CustomerID |
++---------+------------+--------+------------+
+|     101 | 2025-06-18 | 250.00 |          1 |
+|     102 | 2025-06-19 | 180.50 |          2 |
++---------+------------+--------+------------+
+
+----------------------------------------------------------------------------------------
+mysql> select * from students;
++-------+--------+--------+
+| regno | name   | dep_id |
++-------+--------+--------+
+|     1 | maha   |      1 |
+|     2 | anujha |      2 |
+|     3 | sathya |      3 |
++-------+--------+--------+
+ alter table students add primary key(regno);
+
+mysql> insert into students values (1,'maha',1);
+ERROR 1062 (23000): Duplicate entry '1' for key 'students.PRIMARY'
+-----------------------------------------------------------------------------------------
+ALLCONSTRAINTS:
+
+mysql> create table allcontr(
+    -> id int auto_increment primary key,
+    -> username varchar(255) unique not null,
+    ->  age int check (age>=18),
+    -> arrears int default null,
+    ->  percentage double not null);
+
+mysql> insert into allcontr value(1,'sona',20,1,70);
+
+mysql> select * from allcontr;
++----+----------+------+---------+------------+
+| id | username | age  | arrears | percentage |
++----+----------+------+---------+------------+
+|  1 | sona     |   20 |       1 |         70 |
++----+----------+------+---------+------------+
+
+mysql> insert into allcontr (username,age,percentage) value('sathya',50,85);
+
+
+mysql> select * from allcontr;
++----+----------+------+---------+------------+
+| id | username | age  | arrears | percentage |
++----+----------+------+---------+------------+
+|  1 | sona     |   20 |       1 |         70 |
+|  2 | sathya   |   50 |    NULL |         85 |
++----+----------+------+---------+------------+
+
+mysql> insert into allcontr value(2,'priya',20,2,80);//duplicate value will not accept
+ERROR 1062 (23000): Duplicate entry '2' for key 'allcontr.PRIMARY'
+
+
+----------------------------------------------------------------------------------------------
+mysql> select * from emp;
++-------+--------+-----------+------+------------+---------+---------+--------+
+| empno | ename  | job       | mgr  | hiredate   | sal     | comm    | deptno |
++-------+--------+-----------+------+------------+---------+---------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800.00 |    NULL |     20 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850.00 |    NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 | 2450.00 |    NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000.00 |    NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 |    NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 | 1100.00 |    NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950.00 |    NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000.00 |    NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 |
++-------+--------+-----------+------+------------+---------+---------+--------+
+
+
+mysql> select count(*) from emp;
++----------+
+| count(*) |
++----------+
+|       14 |
++----------+
+
+mysql> select emp.empno,emp.ename,emp.job,dept.dname from emp
+    -> left join dept on emp.deptno=dept.deptno;
++-------+--------+-----------+------------+
+| empno | ename  | job       | dname      |
++-------+--------+-----------+------------+
+|  7369 | SMITH  | CLERK     | RESEARCH   |
+|  7499 | ALLEN  | SALESMAN  | SALES      |
+|  7521 | WARD   | SALESMAN  | SALES      |
+|  7566 | JONES  | MANAGER   | RESEARCH   |
+|  7654 | MARTIN | SALESMAN  | SALES      |
+|  7698 | BLAKE  | MANAGER   | SALES      |
+|  7782 | CLARK  | MANAGER   | ACCOUNTING |
+|  7788 | SCOTT  | ANALYST   | RESEARCH   |
+|  7839 | KING   | PRESIDENT | ACCOUNTING |
+|  7844 | TURNER | SALESMAN  | SALES      |
+|  7876 | ADAMS  | CLERK     | RESEARCH   |
+|  7900 | JAMES  | CLERK     | SALES      |
+|  7902 | FORD   | ANALYST   | RESEARCH   |
+|  7934 | MILLER | CLERK     | ACCOUNTING |
++-------+--------+-----------+------------+
+
+mysql> select emp.empno,emp.ename,emp.job,dept.dname from emp
+    -> right join dept on emp.deptno=dept.deptno;
++-------+--------+-----------+------------+
+| empno | ename  | job       | dname      |
++-------+--------+-----------+------------+
+|  7934 | MILLER | CLERK     | ACCOUNTING |
+|  7839 | KING   | PRESIDENT | ACCOUNTING |
+|  7782 | CLARK  | MANAGER   | ACCOUNTING |
+|  7902 | FORD   | ANALYST   | RESEARCH   |
+|  7876 | ADAMS  | CLERK     | RESEARCH   |
+|  7788 | SCOTT  | ANALYST   | RESEARCH   |
+|  7566 | JONES  | MANAGER   | RESEARCH   |
+|  7369 | SMITH  | CLERK     | RESEARCH   |
+|  7900 | JAMES  | CLERK     | SALES      |
+|  7844 | TURNER | SALESMAN  | SALES      |
+|  7698 | BLAKE  | MANAGER   | SALES      |
+|  7654 | MARTIN | SALESMAN  | SALES      |
+|  7521 | WARD   | SALESMAN  | SALES      |
+|  7499 | ALLEN  | SALESMAN  | SALES      |
+|  NULL | NULL   | NULL      | OPERATIONS |
++-------+--------+-----------+------------+
+
+mysql> select * from dept;
++--------+------------+----------+
+| deptno | dname      | loc      |
++--------+------------+----------+
+|     10 | ACCOUNTING | NEW YORK |
+|     20 | RESEARCH   | DALLAS   |
+|     30 | SALES      | CHICAGO  |
+|     40 | OPERATIONS | BOSTON   |
++--------+------------+----------+
