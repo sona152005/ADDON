@@ -1,0 +1,214 @@
+LIBRARY DB-CREATE 3 TABLES AND POPULATE DATA
+
+mysql> create table library(
+    -> stuname varchar(30),
+    -> rollno int,
+    -> dept varchar(20));
+Query OK, 0 rows affected (0.07 sec)
+mysql> create table libbook(
+    -> bookname varchar(30),
+    -> bookid int);
+Query OK, 0 rows affected (0.04 sec)
+mysql> create table bookdetails(
+    -> stuid int,
+    -> due_date date,
+    -> submitted_date date);
+Query OK, 0 rows affected (0.07 sec)
+ysql> insert into library values('abhi',1,'bsc it');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into library values('niks',2,'bsc it');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into library values('prabu',3,'bsc it');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into library values('sanju',4,'bsc it');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into library values('suba',5,'bsc it');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from library;
++---------+--------+--------+
+| stuname | rollno | dept   |
++---------+--------+--------+
+| anu  |      1 | bsc it |
+| nithya   |      2 | bsc it |
+| priya  |      3 | bsc it |
+| sathya   |      4 | bsc it |
+| sona    |      5 | bsc it |
++---------+--------+--------+
+5 rows in set (0.00 sec)
+
+mysql> insert into libbook values('marvels',1342);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into libbook values('theavengers',8636);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into libbook values('wolverine',4863);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into libbook values('astrocity',5324);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into libbook values('thedarkknight',7501);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from libbook;
++---------------+--------+
+| bookname      | bookid |
++---------------+--------+
+| marvels       |   1342 |
+| theavengers   |   8636 |
+| wolverine     |   4863 |
+| astrocity     |   5324 |
+| thedarkknight |   7501 |
++---------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> insert into bookdetails values('1','2025-06-05','2025-06-06');
+Query OK, 1 row affected (0.05 sec)
+mysql> insert into bookdetails values('2','2025-06-08','2025-06-09');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into bookdetails values('3','2025-06-13','2025-06-14');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into bookdetails values('4','2025-06-12','2025-06-13');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into bookdetails values('5','2025-06-16','2025-06-17');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from bookdetails;
++-------+------------+----------------+
+| stuid | due_date   | submitted_date |
++-------+------------+----------------+
+|     1 | 2025-06-05 | 2025-06-06     |
+|     2 | 2025-06-08 | 2025-06-09     |
+|     3 | 2025-06-13 | 2025-06-14     |
+|     4 | 2025-06-12 | 2025-06-13     |
+|     5 | 2025-06-16 | 2025-06-17     |
++-------+------------+----------------+
+5 rows in set (0.00 sec)
+-------------------------------------------------------------------------------------
+CREATE STUDENT AND COURSE TABLES :
+
+mysql> create table student(
+    -> rollno int,
+    -> name varchar(30),
+    -> department varchar(30));
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> desc student;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| rollno     | int         | YES  |     | NULL    |       |
+| name       | varchar(30) | YES  |     | NULL    |       |
+| department | varchar(30) | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> create table course(
+    -> dept_name varchar(30),
+    -> dept_id int,
+    -> course_fee int);
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> desc course;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| dept_name  | varchar(30) | YES  |     | NULL    |       |
+| dept_id    | int         | YES  |     | NULL    |       |
+| course_fee | int         | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+-----------------------------------------------------------------------------------------
+INSERT 5 RECORDS IN EACH :
+
+mysql> insert into student values(1,'ram','bsc it');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into student values(2,'sai','bsc cs');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student values(3,'sri','bsc it');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into student values(4,'hari','bca');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into student values(5,'arun','bcom');
+Query OK, 1 row affected (0.04 sec)
+mysql> select * from student;
++--------+------+------------+
+| rollno | name | department |
++--------+------+------------+
+|      1 | ramya  | bsc it     |
+|      2 | sathya  | bsc cs     |
+|      3 | priya  | bsc it     |
+|      4 | harini | bca        |
+|      5 | anu | bcom       |
++--------+------+------------+
+5 rows in set (0.00 sec)
+
+mysql> insert into course values('bsc it',1001,35000);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into course values('bsc cs',1002,36000);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into course values('bsc it',1001,35000);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into course values('bca',1003,34000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into course values('bcom',1004,40000);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select * from course;
++-----------+---------+------------+
+| dept_name | dept_id | course_fee |
++-----------+---------+------------+
+| bsc it    |    1001 |      35000 |
+| bsc cs    |    1002 |      36000 |
+| bsc it    |    1001 |      35000 |
+| bca       |    1003 |      34000 |
+| bcom      |    1004 |      40000 |
++-----------+---------+------------+
+5 rows in set (0.00 sec)
+------------------------------------------------------------------------------
+UPDATE A COURSE FEE :
+
+mysql> update course set course_fee='40000' where dept_name='bsc it';
+Query OK, 2 rows affected (0.01 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> update course set course_fee='42000' where dept_name='bsc cs';
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update course set course_fee='44000' where dept_name='bca';
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update course set course_fee='45000' where dept_name='bcom';
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from course;
++-----------+---------+------------+
+| dept_name | dept_id | course_fee |
++-----------+---------+------------+
+| bsc it    |    1001 |      40000 |
+| bsc cs    |    1002 |      42000 |
+| bsc it    |    1001 |      40000 |
+| bca       |    1003 |      44000 |
+| bcom      |    1004 |      45000 |
++-----------+---------+------------+
+5 rows in set (0.00 sec)
