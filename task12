@@ -1,0 +1,203 @@
+TASK 1:
+
+USE studentdb;
+
+CREATE TABLE students (
+    id INT PRIMARY KEY,
+    name VARCHAR(50),
+    department VARCHAR(50),
+    marks FLOAT
+);
+----------------------------------------------------------------------
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class DBConnection {
+	static String URL = "jdbc:mysql://localhost:3306/studentdb";
+	static String USERNAME ="root";
+	static String PASSWORD ="";
+
+	public static void main(String[] args) {
+		try {
+		Connection connect = DriverManager.getConnection(URL, USERNAME, PASSWORD);           
+		System.out.println("connected successfully!");
+								}catch(SQLException e) {
+			e.printStackTrace();
+			
+		}
+	}
+	}
+output:
+
+connected successfully!
+
+TASK 2:
+
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.util.Scanner;
+
+public class InsertStudent {
+    public static void main(String[] args) {
+        try (Connection conn = DBConnection.getConnection()) {
+            String sql = "INSERT INTO students (id, name, department, marks) VALUES (?, ?, ?, ?)";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            Scanner sc = new Scanner(System.in);
+            System.out.print("Enter ID: ");
+            stmt.setInt(1, sc.nextInt());
+            sc.nextLine(); // clear buffer
+            System.out.print("Enter Name: ");
+            stmt.setString(2, sc.nextLine());
+            System.out.print("Enter Department: ");
+            stmt.setString(3, sc.nextLine());
+            System.out.print("Enter Marks: ");
+            stmt.setFloat(4, sc.nextFloat());
+            int rows = stmt.executeUpdate();
+            System.out.println(" " + rows + " record inserted.");
+        } catch (Exception e) {
+            System.out.println(" Error: " + e.getMessage());
+        }
+    }
+}
+Output:
+Enter ID: 101
+Enter Name: Sona
+Enter Department: IT
+Enter Marks: 89.5
+1 record inserted.
+
+TASK 3:
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class DisplayStudents {
+    public static void main(String[] args) {
+        try (Connection conn = DBConnection.getConnection()) {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM students");
+
+            System.out.println("ID\tName\t\tDepartment\tMarks");
+            System.out.println("---------------------------------------------");
+
+            while (rs.next()) {
+                System.out.printf("%d\t%-10s\t%-10s\t%.2f\n",
+                    rs.getInt("id"),
+                    rs.getString("name"),
+                    rs.getString("department"),
+                    rs.getFloat("marks"));
+            }
+        } catch (Exception e) {
+            System.out.println(" Error: " + e.getMessage());
+        }
+    }
+}
+output:
+ID	Name		Department	Marks
+---------------------------------------------
+101	Sona 	IT        	89.50
+
+MAIN PROGRAM:
+
+import java.sql.*;
+import java.util.Scanner;
+
+public class StudentDBManager {
+    public static void main(String[] args) {
+         String URL = "jdbc:mysql://localhost:3306/studentdb";
+         String USER = "root";
+         String PASS = ""; 
+        Scanner sc = new Scanner(System.in);
+        Connection conn = null;
+        try {
+            // Step 1: Connect to DB
+            conn = DriverManager.getConnection(URL, USER, PASS);
+            System.out.println(" Connected to MySQL Database.");
+            while (true) {
+                System.out.println("\n--- Student DB Menu ---");
+                System.out.println("1. Insert Student");
+                System.out.println("2. Display Students");
+                System.out.println("3. Exit");
+                System.out.print("Enter your choice: ");
+                int choice = sc.nextInt();
+
+                if (choice == 1) {
+                    
+                    System.out.print("Enter ID: ");
+                    int id = sc.nextInt();
+                    sc.nextLine(); // clear buffer
+                    System.out.print("Enter Name: ");
+                    String name = sc.nextLine();
+                    System.out.print("Enter Department: ");
+                    String dept = sc.nextLine();
+                    System.out.print("Enter Marks: ");
+                    float marks = sc.nextFloat();
+                    String insertQuery = "INSERT INTO students (id, name, department, marks) VALUES (?, ?, ?, ?)";
+                    PreparedStatement pstmt = conn.prepareStatement(insertQuery);
+                    pstmt.setInt(1, id);
+                    pstmt.setString(2, name);
+                    pstmt.setString(3, dept);
+                    pstmt.setFloat(4, marks);
+
+                    int rows = pstmt.executeUpdate();
+                    System.out.println("✅ " + rows + " student inserted successfully!");
+
+                } else if (choice == 2) {
+                    // Display Students
+                    Statement stmt = conn.createStatement();
+                    ResultSet rs = stmt.executeQuery("SELECT * FROM students");
+
+                    System.out.println("\nID\tName\t\tDepartment\tMarks");
+                    System.out.println("---------------------------------------------");
+                    while (rs.next()) {
+                        System.out.printf("%d\t%-10s\t%-10s\t%.2f\n",
+                                rs.getInt("id"),
+                                rs.getString("name"),
+                                rs.getString("department"),
+                                rs.getFloat("marks"));
+                    }
+
+                } else if (choice == 3) {
+                    System.out.println(" Exiting...");
+                    break;
+                } else {
+                    System.out.println(" Invalid choice. Try again.");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        } finally {
+            try {
+                if (conn != null) conn.close();
+            } catch (SQLException se) {
+                System.out.println(" Error closing connection.");
+            }
+        }
+    }
+}
+Output:
+ Connected to MySQL Database.
+
+--- Student DB Menu ---
+1. Insert Student
+2. Display Students
+3. Exit
+Enter your choice: 1
+Enter ID: 101
+Enter Name: Sona
+Enter Department: IT
+Enter Marks: 88.5
+ 1 student inserted successfully!
+
+--- Student DB Menu ---
+1. Insert Student
+2. Display Students
+3. Exit
+Enter your choice: 2
+
+ID	Name		Department	Marks
+---------------------------------------------
+101	Sona   	IT        	88.50
